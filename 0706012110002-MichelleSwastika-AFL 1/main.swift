@@ -41,6 +41,6 @@ let Shops: [Shop] = [
     ])
 ]
 
-var shoppingcart: [String:Int] = [:]
+var shoppingcart: [String:[String: (price: Int, amount: Int)]] = [:]
 
 startShopping()
