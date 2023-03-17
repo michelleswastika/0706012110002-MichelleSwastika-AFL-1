@@ -113,7 +113,7 @@ func order(product: Product, shop: Shop) -> Void {
         addToCart(shop: shop, product: product, addAmount: amount)
         
         print()
-        startShopping()
+        shoppingInShop(shop: shop)
     }
     else {
         print("\nPlease enter a valid amount.")
@@ -211,7 +211,6 @@ func checkOut(totalpay : Int) -> Void {
                         shoppingcart = [:]
                         print()
                         break
-                        
                     }
                 }
                 startShopping()
