@@ -203,11 +203,17 @@ func checkOut(totalpay : Int) -> Void {
                 print("Your total order : \(totalpay)")
                 print("You pay : \(money) Change : \(Int(money)!-totalpay)")
                 
+                while (true) {
                 print("\nEnjoy your meals!")
                 print("Press [return] to go back to main screen.", terminator: " ")
-                let _ = readLine()
-                shoppingcart = [:]
-                print()
+                let pilih = readLine()
+                    if pilih == "" {
+                        shoppingcart = [:]
+                        print()
+                        break
+                        
+                    }
+                }
                 startShopping()
             }
             else if payment < totalpay {
