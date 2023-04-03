@@ -37,4 +37,4 @@ import Foundation
 
 //var shoppingcart: [String:[String: (price: Int, amount: Int)]] = [:]
 
-startShopping()
+//startShopping()
