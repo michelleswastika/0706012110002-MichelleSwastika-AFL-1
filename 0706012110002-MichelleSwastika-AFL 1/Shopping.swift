@@ -29,14 +29,6 @@ Please choose a cafeteria:
         return startShopping()
     }
     
-    //    Shops.forEach({ shop in
-    //        if shop.ID == Int(input) {
-    //            shoppingInShop(shop: shop)
-    //            return
-    //        }
-    //    })
-    //
-    
     if let shopFound = Shops.first(where: { $0.ID == Int(input) }) {
         
         shoppingInShop(shop: shopFound)
@@ -81,7 +73,7 @@ func shoppingInShop(shop: Shop) -> Void {
     
     if let productSelected = shop.products.first(where: { $0.ID == Int(input) }) {
         
-        // masuk ke keranjang kuning
+        // masuk ke shopping cart
         order(product: productSelected, shop: shop)
         
     } else {
@@ -123,12 +115,12 @@ func order(product: Product, shop: Shop) -> Void {
 
 func addToCart(shop: Shop, product: Product, addAmount: Int) {
     
-    // kalau toko nya tidak ada bikin dulu array kosong utk toko ituh
+    // kalau tokonya g ada bikin dulu array kosong u/ toko itu
     if shoppingcart[shop.name] == nil {
         shoppingcart[shop.name] = [:]
     }
     
-    // kalau toko sudah ada dan produk tidak ada, buat dengan default falue 0
+    // kalau toko sudah ada dan produk tidak ada, buat dengan default value 0
     if shoppingcart[shop.name]![product.name] == nil {
         shoppingcart[shop.name]![product.name] = (
             price: product.price,
@@ -136,7 +128,7 @@ func addToCart(shop: Shop, product: Product, addAmount: Int) {
         )
     }
     
-    // baru kita tambahkan amount nya
+    // tambahkan amount nya
     shoppingcart[shop.name]![product.name]! = (
         price: product.price,
         amount: shoppingcart[shop.name]![product.name]!.amount + addAmount
