@@ -11,7 +11,7 @@ class Item {
     var id: Int
     var name: String
     
-    init(id: Int, name: String) {
+    init(_ id: Int, _ name: String) {
         self.id = id
         self.name = name
     }
@@ -30,7 +30,7 @@ class Shop : Item, Hashable{
         
     // Add a product to the shop
     func addProduct(id: Int, name: String, price: Double) -> Product {
-        let product = Product(id: id, name: name, price: price, shop: self)
+        let product = Product(id, name, price, self)
         products.append((id, name, price))
         return product
     }
@@ -40,21 +40,29 @@ class Product : Item{
     var price: Double
     weak var shop: Shop?
         
-    init(id: Int, name: String, price: Double, shop: Shop) {
+    init(_ id: Int, _ name: String, _ price: Double, _ shop: Shop) {
         self.price = price
         self.shop = shop
-        super.init(id: id, name: name)
+        super.init(id, name)
     }
 }
 
 class ShoppingCart{
     var products: [Product] = []
-    var amount: Double = 0
+    var amount: Int = 0
         
     // Add a product to the shopping cart and update the amount
-    func addProduct(_ product: Product) {
+    func addProduct(_ product: Product, _amount: Int) {
         products.append(product)
-        amount += product.price
+        amount += amount
+    }
+    
+    func addProductById(_ shopId: Int, _ productId: Int, _ amount: Int) {
+        if let shop = shopId.first(where: { $0.id == shopId }),
+           let product = shop.products.first(where: { $0.id == productId }) {
+            let item = (shop: shop, product: product, amount: amount)
+            products.append(item)
+        }
     }
         
     // Group the products by shop and return a dictionary

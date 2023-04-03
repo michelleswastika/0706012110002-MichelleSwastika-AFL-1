@@ -11,7 +11,7 @@
 //    var ID: Int
 //    var name: String
 //    var price: Int
-//    
+//
 //    init(ID: Int, name: String, price: Int) {
 //        self.ID = ID
 //        self.name = name
@@ -23,13 +23,13 @@
 //    var ID: Int
 //    var name: String
 //    var products: [Product]
-//    
+//
 //    init(ID: Int, name: String, products: [Product]) {
 //        self.ID = ID
 //        self.name = name
 //        self.products = products
 //    }
-//    
+//
 //    func displayProducts() {
 //        print("\nHi, Welcome to \(name)!")
 //        print("What would you like to order?")
@@ -42,43 +42,43 @@
 //
 //class ShoppingCart {
 //    var items: [String:[String: (price: Int, amount: Int)]]
-//    
+//
 //    init() {
 //        items = [:]
 //    }
-//    
+//
 //    func addToCart(shop: Shop, product: Product, addAmount: Int) {
 //        if items[shop.name] == nil {
 //            items[shop.name] = [:]
 //        }
-//        
+//
 //        let currentAmount = items[shop.name]![product.name]?.amount ?? 0
 //        let currentPrice = items[shop.name]![product.name]?.price ?? 0
-//        
+//
 //        items[shop.name]![product.name] = (
 //            price: currentPrice + product.price,
 //            amount: currentAmount + addAmount
 //        )
-//        
+//
 //        print("\n\(addAmount) \(product.name) added to shopping cart.")
 //    }
-//    
+//
 //    func displayCart() {
 //        if items.isEmpty {
 //            print("\nShopping cart is empty.")
 //            return
 //        }
-//        
+//
 //        print("\nShopping Cart:")
 //        print("--------------------------------------")
-//        
+//
 //        for (shopName, products) in items {
 //            print("\(shopName):")
-//            
+//
 //            for (productName, productData) in products {
 //                print("- \(productName) x\(productData.amount) @ \(productData.price)")
 //            }
-//            
+//
 //            print("--------------------------------------")
 //        }
 //    }
@@ -87,7 +87,7 @@
 //class UCWalkCafeteria {
 //    var shops: [Shop]
 //    var shoppingCart: ShoppingCart
-//    
+//
 //    init() {
 //        shops = [
 //            Shop(
