@@ -10,7 +10,7 @@ import Foundation
 protocol SystemFlow{
     func startShopping()
     func shoppingInShop(shop: Shop)
-    func order(product: Product, shop: Shop)
+    func order(_ product: Product, _ shop: Shop)
 }
 
 struct Run: SystemFlow {
@@ -76,21 +76,21 @@ struct Run: SystemFlow {
             return startShopping()
         }
         if let productSelected = shop.products.first(where: { $0.id == Int(input) }) {
-            // add product to shopping cart
-            order(product: productSelected, shop: shop)
+            // select product to order
+            order(productSelected, shop)
         }
         else {
             if(input == "b") {
                 startShopping()
-            } else {
+            }
+            else {
                 print("\nInvalid input. Please try again.")
                 shoppingInShop(shop: shop)
             }
-
         }
     }
     
-    func order(product: Product, shop: Shop) -> Void {
+    func order(_ product: Product, _ shop: Shop) -> Void {
         var amount:Int?
             print("""
         \n\(product.name) @ \(product.price)
@@ -98,7 +98,7 @@ struct Run: SystemFlow {
         """, terminator: " ")
             guard let inp = readLine()?.lowercased() else {
                 print("\nPlease enter your choice.")
-                return order(product: product, shop: shop)
+                return order(product, shop)
             }
         if let amount = Int(inp) {
             var shopping: ShoppingCart
@@ -108,7 +108,7 @@ struct Run: SystemFlow {
         }
         else {
             print("\nPlease enter a valid amount.")
-            order(product: product, shop: shop)
+            order(product, shop)
         }
     }
 }
