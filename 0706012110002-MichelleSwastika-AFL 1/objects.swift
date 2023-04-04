@@ -7,6 +7,112 @@
 
 import Foundation
 
+protocol SystemFlow{
+    func startShopping()
+    func shoppingInShop(shop: Shop)
+    func order(product: Product, shop: Shop)
+}
+
+struct Run: SystemFlow {
+    func startShopping(){
+        print("""
+    \n==== Welcome to UC-Walk Cafeteria ====
+    Please choose a cafeteria:
+    --------------------------------------
+    """)
+
+        store.forEach({ shop in
+            print("[\(shop.id)] \(shop.name)")
+        })
+
+        print("""
+            -
+            [S]hopping Cart
+            [Q]uit
+            --------------------------------------
+            Your choice?
+            """, terminator: " ")
+
+        guard let input = readLine()?.lowercased() else {
+            print("\nPlease enter your choice.")
+            return startShopping()
+        }
+
+        if let shopSelected = store.first(where: { $0.id == Int(input) }) {
+            shoppingInShop(shop: shopSelected)
+        }
+        else {
+            if(input == "s") {
+                shopping.showShoppingCart()
+            }
+            else if(input == "q") {
+                exit(0)
+            }
+            else {
+                print("\nInvalid input. Please try again.")
+                startShopping()
+            }
+        }
+    }
+    
+    func shoppingInShop(shop: Shop) -> Void {
+        print("""
+        \nHi, Welcome to \(shop.name)!
+        What would you like to order?
+        --------------------------------------
+        """)
+        shop.products.forEach({ product in
+            print("[\(product.id)] \(product.name) - Harga : \(product.price)")
+        })
+
+        print("""
+        -
+        [B]ack to main menu
+        Your choice?
+        """, terminator: " ")
+
+        guard let input = readLine()?.lowercased() else {
+            print("\nPlease enter your choice.")
+            return startShopping()
+        }
+        if let productSelected = shop.products.first(where: { $0.id == Int(input) }) {
+            // add product to shopping cart
+            order(product: productSelected, shop: shop)
+        }
+        else {
+            if(input == "b") {
+                startShopping()
+            } else {
+                print("\nInvalid input. Please try again.")
+                shoppingInShop(shop: shop)
+            }
+
+        }
+    }
+    
+    func order(product: Product, shop: Shop) -> Void {
+        var amount:Int?
+            print("""
+        \n\(product.name) @ \(product.price)
+        How many \(product.name) do you want to buy?
+        """, terminator: " ")
+            guard let inp = readLine()?.lowercased() else {
+                print("\nPlease enter your choice.")
+                return order(product: product, shop: shop)
+            }
+        if let amount = Int(inp) {
+            var shopping: ShoppingCart
+            shopping.addToCart(shop: shop, product: product, addAmount: amount)
+            print()
+            shoppingInShop(shop: shop)
+        }
+        else {
+            print("\nPlease enter a valid amount.")
+            order(product: product, shop: shop)
+        }
+    }
+}
+
 class Item {
     var id: Int
     var name: String
@@ -18,7 +124,7 @@ class Item {
 }
 
 class Shop : Item, Hashable{
-    var products: [(id: Int, name: String, price: Double)] = []
+    var products: [(id: Int, name: String, price: Int)] = []
         
     static func == (lhs: Shop, rhs: Shop) -> Bool {
         return lhs.name == rhs.name
@@ -29,9 +135,8 @@ class Shop : Item, Hashable{
     }
         
     // Add a product to the shop
-    func addProduct(id: Int, name: String, price: Double) -> Product {
-        let product = Product(id, name, price, self)
-        products.append((id, name, price))
+    func addProduct(_ product: Product) -> Product {
+        products.append((product.id, product.name, product.price))
         return product
     }
 }
@@ -74,8 +179,8 @@ class ShoppingCart{
     func showShoppingCart() -> Void {
         if cart.isEmpty {
             print("\nYour cart is empty.\n")
-
-//            startShopping()
+            
+            run.startShopping()
         }
         else {
 
@@ -102,14 +207,57 @@ class ShoppingCart{
             }
 
             if inputShoppingCart == "b" {
-//                startShopping()
+                run.startShopping()
             }
             else if inputShoppingCart == "p" {
-//                checkOut(totalpay: totalPay)
+                checkOut(totalpay: totalPay)
             }
             else {
                 print("\nInvalid input. Please try again.")
                 showShoppingCart()
+            }
+        }
+    }
+    
+    func checkOut(totalpay : Int) -> Void {
+        var payment : Int?
+        while payment == nil{
+            print("\nYour total order amount : \(totalpay)")
+            print("Enter the amount of your money : ", terminator: " ")
+
+            guard let money = readLine()?.lowercased() else {
+                print("\nPlease enter your payment.")
+                return checkOut(totalpay:totalpay)
+            }
+
+            if let payment = Int(money) {
+                if payment >= totalpay {
+                    print("Your total order : \(totalpay)")
+                    print("You pay : \(money) Change : \(Int(money)!-totalpay)")
+
+                    while (true) {
+                    print("\nEnjoy your meals!")
+                    print("Press [return] to go back to main screen.", terminator: " ")
+                    let pilih = readLine()
+                        if pilih == "" {
+                            cart = [:]
+                            print()
+                            break
+                        }
+                    }
+                    run.startShopping()
+                }
+                else if payment < totalpay {
+                    print("\nThe amount your entered is insufficient. Please try again.")
+                    checkOut(totalpay: totalpay)
+                }
+                else if payment < 0 {
+                    print("\nPlease enter a valid amount.")
+                    checkOut(totalpay: totalpay)
+                }
+            } else {
+                print("\nPlease enter a valid amount.")
+                checkOut(totalpay: totalpay)
             }
         }
     }
