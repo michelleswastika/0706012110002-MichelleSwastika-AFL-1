@@ -154,7 +154,6 @@ import Foundation
 //            })
 //
 //        })
-//
 //        print("""
 //\nPress [B] to go back
 //Press [P] to pay / checkout

@@ -37,10 +37,10 @@ class Shop : Item, Hashable{
 }
 
 class Product : Item{
-    var price: Double
+    var price: Int
     weak var shop: Shop?
         
-    init(_ id: Int, _ name: String, _ price: Double, _ shop: Shop) {
+    init(_ id: Int, _ name: String, _ price: Int, _ shop: Shop) {
         self.price = price
         self.shop = shop
         super.init(id, name)
@@ -48,36 +48,69 @@ class Product : Item{
 }
 
 class ShoppingCart{
-    var products: [Product] = []
-    var amount: Int = 0
+    var cart: [String:[String: (price: Int, amount: Int)]] = [:]
         
-    // Add a product to the shopping cart and update the amount
-    func addProduct(_ product: Product, _amount: Int) {
-        products.append(product)
-        amount += amount
+    func addToCart(shop: Shop, product: Product, addAmount: Int) {
+        // Check whether the shop array exists, if it doesn't exist create an empty array for that shop
+        if cart[shop.name] == nil {
+            cart[shop.name] = [:]
+        }
+
+        // If the array exist but it has nothing inside, set the default value to 0
+        if cart[shop.name]![product.name] == nil {
+            cart[shop.name]![product.name] = (
+                price: product.price,
+                amount: 0
+            )
+        }
+
+        // Add a product to the shopping cart and update the amount
+        cart[shop.name]![product.name]! = (
+            price: product.price,
+            amount: cart[shop.name]![product.name]!.amount + addAmount
+        )
     }
     
-    func addProductById(_ shopId: Int, _ productId: Int, _ amount: Int) {
-        if let shop = shopId.first(where: { $0.id == shopId }),
-           let product = shop.products.first(where: { $0.id == productId }) {
-            let item = (shop: shop, product: product, amount: amount)
-            products.append(item)
+    func showShoppingCart() -> Void {
+        if cart.isEmpty {
+            print("\nYour cart is empty.\n")
+
+//            startShopping()
         }
-    }
-        
-    // Group the products by shop and return a dictionary
-    func groupProductsByShop() -> [Shop: [Product]] {
-    var groups: [Shop: [Product]] = [:]
-    for product in products {
-        if let shop = product.shop {
-            if var productsInGroup = groups[shop] {
-                productsInGroup.append(product)
-                groups[shop] = productsInGroup
-            } else {
-                groups[shop] = [product]
+        else {
+
+            var totalPay = 0
+
+            cart.forEach({ shopName, cartInTheShop in
+                print("\nYour order from \(shopName):")
+
+                cartInTheShop.forEach({ productName, data in
+                    print("- \(productName) (x\(data.amount)) = \(data.price * data.amount)")
+                    totalPay += data.price * data.amount
+                })
+
+            })
+            print("""
+    \nPress [B] to go back
+    Press [P] to pay / checkout
+    Your choice?
+    """, terminator: " ")
+
+            guard let inputShoppingCart = readLine()?.lowercased() else {
+                print("\nPlease enter your choice.")
+                return showShoppingCart()
+            }
+
+            if inputShoppingCart == "b" {
+//                startShopping()
+            }
+            else if inputShoppingCart == "p" {
+//                checkOut(totalpay: totalPay)
+            }
+            else {
+                print("\nInvalid input. Please try again.")
+                showShoppingCart()
             }
         }
-    }
-        return groups
     }
 }

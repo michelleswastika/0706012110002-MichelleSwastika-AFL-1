@@ -62,7 +62,6 @@ kopte.addProduct(id: 2, name: "Coklat tarik kopte", price: 14_000)
 kopte.addProduct(id: 3, name: "Milo dinosaur", price: 10_000)
 kopte.addProduct(id: 4, name: "Cincau doger", price: 10_000)
 
-
 // Create a shopping cart and add the products to it
 let myCart = ShoppingCart()
 myCart.addProduct(1, "Tahu isi", 5000, "Tuku-Tuku", 3)
