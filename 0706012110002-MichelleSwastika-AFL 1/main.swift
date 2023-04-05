@@ -6,9 +6,9 @@
 import Foundation
 // Create shops
 let tukutuku = Shop(1, "Tuku-Tuku")
-let gotri = Shop(1, "Gotri")
-let madamlie = Shop(1, "Madam Lie")
-let kopte = Shop(1, "Kopte")
+let gotri = Shop(2, "Gotri")
+let madamlie = Shop(3, "Madam Lie")
+let kopte = Shop(4, "Kopte")
 
 // Create products
 var tahuisi = Product(1, "Tahu isi", 5000, tukutuku)
