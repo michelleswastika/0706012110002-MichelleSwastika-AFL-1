@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		203063F229DAC6F600A7012D /* objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203063F129DAC6F600A7012D /* objects.swift */; };
-		2036D78E29BB02210037DBAF /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2036D78D29BB02210037DBAF /* Shopping.swift */; };
-		20919EE829D66D4900B9BD6E /* run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20919EE729D66D4900B9BD6E /* run.swift */; };
 		20D4FC9529AD9E1300291E03 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D4FC9429AD9E1300291E03 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,8 +25,6 @@
 
 /* Begin PBXFileReference section */
 		203063F129DAC6F600A7012D /* objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = objects.swift; sourceTree = "<group>"; };
-		2036D78D29BB02210037DBAF /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
-		20919EE729D66D4900B9BD6E /* run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = run.swift; sourceTree = "<group>"; };
 		20D4FC9129AD9E1300291E03 /* 0706012110002-MichelleSwastika-AFL 1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110002-MichelleSwastika-AFL 1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20D4FC9429AD9E1300291E03 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,8 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				20D4FC9429AD9E1300291E03 /* main.swift */,
-				2036D78D29BB02210037DBAF /* Shopping.swift */,
-				20919EE729D66D4900B9BD6E /* run.swift */,
 				203063F129DAC6F600A7012D /* objects.swift */,
 			);
 			path = "0706012110002-MichelleSwastika-AFL 1";
@@ -129,10 +123,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20919EE829D66D4900B9BD6E /* run.swift in Sources */,
 				20D4FC9529AD9E1300291E03 /* main.swift in Sources */,
 				203063F229DAC6F600A7012D /* objects.swift in Sources */,
-				2036D78E29BB02210037DBAF /* Shopping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
