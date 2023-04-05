@@ -87,6 +87,7 @@ kopte.addProduct(cincaudoger)
 
 // Create the store array
 let store = [tukutuku, gotri, madamlie, kopte]
+let shopping = ShoppingCart()
+let run = Run()
 
-var shopping: ShoppingCart
-var run: Run
+run.startShopping()

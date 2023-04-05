@@ -75,7 +75,14 @@ struct Run: SystemFlow {
             print("\nPlease enter your choice.")
             return startShopping()
         }
-        if let productSelected = shop.products.first(where: { $0.id == Int(input) }) {
+//        if let productSelected = shop.products.first(where: { $0.id == Int(input) }) {
+//            // select product to order
+//            order(productSelected, shop)
+//        }
+        
+        if let (productId, productName, productPrice) = shop.products.first(where: { $0.id == Int(input) }) {
+            // create a Product object from the tuple
+            let productSelected = Product(productId, productName, productPrice, shop)
             // select product to order
             order(productSelected, shop)
         }
@@ -101,7 +108,6 @@ struct Run: SystemFlow {
                 return order(product, shop)
             }
         if let amount = Int(inp) {
-            var shopping: ShoppingCart
             shopping.addToCart(shop: shop, product: product, addAmount: amount)
             print()
             shoppingInShop(shop: shop)
